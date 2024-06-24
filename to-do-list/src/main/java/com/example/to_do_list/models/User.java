@@ -24,7 +24,7 @@ public class User {
     private String password;
 
     @JsonIgnoreProperties("user")
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     private List<Task> tasks;
 
 
