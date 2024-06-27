@@ -24,9 +24,13 @@ public class TaskController {
 
 
     @GetMapping
-    public ResponseEntity<List<Task>> getAllTasks(@RequestParam(required = false, name = "taskStatus") TaskStatus taskStatus){
-        if(taskStatus != null){
-            return new ResponseEntity<>(taskService.getTasksByStatus(taskStatus), HttpStatus.OK);
+    public ResponseEntity<List<Task>> getAllTasks(@RequestParam(required = false, name = "taskStatus") TaskStatus status,
+                                                  @RequestParam(required = false, name = "taskType") TaskType type) {
+        if(status != null){
+            return new ResponseEntity<>(taskService.getTasksByStatus(status), HttpStatus.OK);
+        }
+        else if(type != null){
+            return new ResponseEntity<>(taskService.getTasksByType(type), HttpStatus.OK);
         }
         else{
             return new ResponseEntity<>(taskService.getAllTasks(), HttpStatus.OK);
@@ -70,4 +74,10 @@ public class TaskController {
     public ResponseEntity<List<Task>> getTasksByUserId(@PathVariable long id){
          return new ResponseEntity<>(taskService.getTasksByUserId(id), HttpStatus.OK);
     }
+
+    @GetMapping(value = "/sortByDeadline")
+    public ResponseEntity<List<Task>> sortDeadline(){
+        return new ResponseEntity<>(taskService.sortTaskByDeadline(), HttpStatus.OK);
+    }
+
 }

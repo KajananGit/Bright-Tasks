@@ -2,6 +2,7 @@ package com.example.to_do_list.service;
 
 import com.example.to_do_list.models.Task;
 import com.example.to_do_list.models.TaskStatus;
+import com.example.to_do_list.models.TaskType;
 import com.example.to_do_list.repositories.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,6 +60,14 @@ public class TaskService {
 
     public List<Task> getTasksByStatus(TaskStatus status){
         return taskRepository.findByTaskStatus(status);
+    }
+
+    public List<Task> getTasksByType(TaskType type){
+        return taskRepository.findByTaskType(type);
+    }
+
+    public List<Task> sortTaskByDeadline(){
+        return taskRepository.sortByDeadline();
     }
 
 }

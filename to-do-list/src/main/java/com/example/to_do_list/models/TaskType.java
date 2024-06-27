@@ -4,7 +4,8 @@ public enum TaskType {
     WORK("Work"),
     SCHOOL("School"),
     HOBBY("Hobby"),
-    SPORT("Sport");
+    SPORT("Sport"),
+    GENERAL("General");
 
     final String displayName;
 
