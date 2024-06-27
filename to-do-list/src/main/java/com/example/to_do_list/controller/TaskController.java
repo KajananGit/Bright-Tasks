@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -39,11 +40,10 @@ public class TaskController {
     }
 
     @PatchMapping(value = "/{id}")
-    public ResponseEntity<Task> updateTask(@RequestBody Task task, @PathVariable long id){
+    public ResponseEntity<Task> updateTask(@RequestBody Map<String, Object> fields, @PathVariable long id){
         Optional<Task> taskToBeUpdated = taskService.getTaskById(id);
         if(taskToBeUpdated.isPresent()){
-            taskService.updateTask(task, id);
-            return new ResponseEntity<>(taskToBeUpdated.get(), HttpStatus.OK);
+            return new ResponseEntity<>(taskService.updateTask(fields, id), HttpStatus.OK);
         }
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }

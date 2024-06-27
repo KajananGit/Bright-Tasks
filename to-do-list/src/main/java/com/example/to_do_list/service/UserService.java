@@ -6,8 +6,11 @@ import com.example.to_do_list.repositories.TaskRepository;
 import com.example.to_do_list.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ReflectionUtils;
 
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -22,13 +25,14 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User updateUser(User user, long id){
+    public User updateUser(Map<String, Object> fields, long id){
         User userUpdate = userRepository.findById(id).get();
-        userUpdate.setUserName(user.getUserName());
-        userUpdate.setEmail(user.getEmail());
-        userUpdate.setPassword(user.getPassword());
-        userRepository.save(userUpdate);
-        return userUpdate;
+        fields.forEach((key, value) -> {
+            Field field = ReflectionUtils.findField(User.class, key);
+            field.setAccessible(true);
+            ReflectionUtils.setField(field, userUpdate, value);
+        });
+        return userRepository.save(userUpdate);
     }
 
     public List<User> getAllUsers(){

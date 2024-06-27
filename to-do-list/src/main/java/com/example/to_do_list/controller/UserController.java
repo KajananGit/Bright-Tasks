@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -41,10 +42,10 @@ public class UserController {
     }
 
     @PatchMapping(value = "/{id}")
-    public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable long id){
+    public ResponseEntity<User> updateUser(@RequestBody Map<String, Object> fields, @PathVariable long id){
         Optional<User> referencedUser = userService.getUserById(id);
         if(referencedUser.isPresent()){
-            return new ResponseEntity<>(userService.updateUser(user, id), HttpStatus.OK);
+            return new ResponseEntity<>(userService.updateUser(fields, id), HttpStatus.OK);
         }
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }

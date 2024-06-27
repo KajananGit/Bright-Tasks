@@ -4,8 +4,11 @@ import com.example.to_do_list.models.Task;
 import com.example.to_do_list.repositories.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ReflectionUtils;
 
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -18,15 +21,14 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
-    public Task updateTask(Task task, long id){
+    public Task updateTask(Map<String, Object> fields, long id){
         Task taskUpdate = taskRepository.findById(id).get();
-        taskUpdate.setTaskTitle(task.getTaskTitle());
-        taskUpdate.setTaskDesc(task.getTaskDesc());
-        taskUpdate.setTaskType(task.getTaskType());
-        taskUpdate.setTaskStatus(task.getTaskStatus());
-        taskUpdate.setDeadline(task.getDeadline());
-        taskRepository.save(taskUpdate);
-        return taskUpdate;
+        fields.forEach((key, value) -> {
+            Field field = ReflectionUtils.findField(Task.class, key);
+            field.setAccessible(true);
+            ReflectionUtils.setField(field, taskUpdate, value);
+        });
+        return taskRepository.save(taskUpdate);
     }
 
     public List<Task> getAllTasks(){
