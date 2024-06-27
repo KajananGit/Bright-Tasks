@@ -1,6 +1,7 @@
 package com.example.to_do_list.service;
 
 import com.example.to_do_list.models.Task;
+import com.example.to_do_list.models.TaskStatus;
 import com.example.to_do_list.models.User;
 import com.example.to_do_list.repositories.TaskRepository;
 import com.example.to_do_list.repositories.UserRepository;

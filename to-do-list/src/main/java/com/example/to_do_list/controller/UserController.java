@@ -1,5 +1,6 @@
 package com.example.to_do_list.controller;
 
+import com.example.to_do_list.models.Task;
 import com.example.to_do_list.models.User;
 import com.example.to_do_list.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

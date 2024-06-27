@@ -1,9 +1,12 @@
 package com.example.to_do_list.controller;
 
 import com.example.to_do_list.models.Task;
+import com.example.to_do_list.models.TaskStatus;
+import com.example.to_do_list.models.TaskType;
 import com.example.to_do_list.repositories.TaskRepository;
 import com.example.to_do_list.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +24,13 @@ public class TaskController {
 
 
     @GetMapping
-    public ResponseEntity<List<Task>> getAllTasks(){
-        return new ResponseEntity<>(taskService.getAllTasks(), HttpStatus.OK);
+    public ResponseEntity<List<Task>> getAllTasks(@RequestParam(required = false, name = "taskStatus") TaskStatus taskStatus){
+        if(taskStatus != null){
+            return new ResponseEntity<>(taskService.getTasksByStatus(taskStatus), HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<>(taskService.getAllTasks(), HttpStatus.OK);
+        }
     }
 
     @GetMapping(value = "/{id}")
@@ -58,4 +66,8 @@ public class TaskController {
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
+    @GetMapping(path = "/user/{id}")
+    public ResponseEntity<List<Task>> getTasksByUserId(@PathVariable long id){
+         return new ResponseEntity<>(taskService.getTasksByUserId(id), HttpStatus.OK);
+    }
 }
