@@ -5,7 +5,6 @@ import SignUpContainer from './containers/SignUpContainer';
 function App() {
   return (
     <>
-    <h1>WELCOME SAKET</h1>
     <SignUpContainer />
     </>
   );
