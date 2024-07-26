@@ -1,22 +1,9 @@
 import {useEffect, useState} from 'react'; 
 import SignUp from '../components/SignUp';
 
-const SignUpContainer = () => {
+const SignUpContainer = ({users, setUsers}) => {
      
-    const [users, setUsers] = useState([]);
-
-    // GET Request to get all existing users
-    const fetchUsers = async () => {
-        const response = await fetch("http://localhost:8080/users")
-        const data = await response.json()
-        setUsers(data)
-    }
-
-
-    useEffect(() => {
-        fetchUsers();
-        console.log(users)
-    }, [])
+    
 
     // POST Request to create new user
     const postNewUser = async (newUser) => {
