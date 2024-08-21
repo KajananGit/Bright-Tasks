@@ -1,0 +1,1 @@
+cd bright-tasks-frontend && npx lint-staged
