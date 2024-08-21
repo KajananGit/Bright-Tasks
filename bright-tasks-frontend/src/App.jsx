@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import SignUpContainer from './containers/SignUpContainer';
 import LoginContainer from './containers/LoginContainer';
