@@ -1,16 +1,20 @@
+import PropTypes from "prop-types";
 import Login from "../components/Login";
 
-const LoginContainer = ({users}) => {
-    
+const LoginContainer = ({ users }) => {
+  return (
+    <>
+      <h1>Hey there!</h1>
+      <Login users={users} />
+      <p>
+        New Here? <a href="">Sign Up</a>
+      </p>
+    </>
+  );
+};
 
+LoginContainer.propTypes = {
+  users: PropTypes.array.isRequired,
+};
 
-    return ( 
-        <>
-        <h1>Hey there!</h1>
-        <Login users={users}/>
-        <p>New Here? <a href="">Sign Up</a></p> 
-        </>
-     );
-}
- 
 export default LoginContainer;
