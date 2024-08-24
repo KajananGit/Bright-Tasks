@@ -1,7 +1,9 @@
 import "./App.css";
 import SignUpContainer from "./containers/SignUpContainer";
 import LoginContainer from "./containers/LoginContainer";
+import Navigation from "./components/Navigation";
 import { useEffect, useState } from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -18,10 +20,26 @@ function App() {
     console.log(users);
   }, []);
 
+  const routes = createBrowserRouter([
+    {
+      path: "/",
+      element: <Navigation />,
+      children: [
+        {
+          path: "/signup",
+          element: <SignUpContainer users={users} setUsers={setUsers} />,
+        },
+        {
+          path: "/login",
+          element: <LoginContainer users={users} />,
+        },
+      ],
+    },
+  ]);
+
   return (
     <>
-      <SignUpContainer users={users} setUsers={setUsers} />
-      <LoginContainer users={users} />
+      <RouterProvider router={routes} />
     </>
   );
 }
