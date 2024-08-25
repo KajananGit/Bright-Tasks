@@ -7,6 +7,12 @@ const Navigation = () => {
       <nav>
         <ul>
           <a>
+            <Link to="/home">Home</Link>
+          </a>
+          <a>
+            <Link to="/aboutus">About</Link>
+          </a>
+          <a>
             <Link to="/signup">Sign Up</Link>
           </a>
           <a>
