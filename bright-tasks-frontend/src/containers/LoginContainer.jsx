@@ -7,7 +7,7 @@ const LoginContainer = ({ users }) => {
       <h1>Hey there!</h1>
       <Login users={users} />
       <p>
-        New Here? <a href="">Sign Up</a>
+        New Here? <a href="/signup">Sign Up</a>
       </p>
     </>
   );

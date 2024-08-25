@@ -1,0 +1,25 @@
+nav {
+  background-color: lightpink;
+}
+
+nav ul {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+nav a {
+  height: 50px;
+  padding: 0 5px;
+  display: flex;
+  align-items: center;
+  color: black;
+  text-decoration: none;
+}
+
+nav a:hover {
+  background-color: #f0f0f0;
+  font-weight: 500;
+  transform: scale(1.03);
+}

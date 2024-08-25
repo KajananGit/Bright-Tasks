@@ -22,7 +22,7 @@ const SignUpContainer = ({ users }) => {
       <SignUp postNewUser={postNewUser} users={users} />
 
       <p>
-        Already registered? <a href="">Login</a>
+        Already registered? <a href="/login">Login</a>
       </p>
     </>
   );
