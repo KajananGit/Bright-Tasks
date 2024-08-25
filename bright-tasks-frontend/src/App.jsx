@@ -4,6 +4,7 @@ import LoginContainer from "./containers/LoginContainer";
 import Navigation from "./components/Navigation";
 import { useEffect, useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./App.css";
 
 function App() {
   const [users, setUsers] = useState([]);

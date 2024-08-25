@@ -1,16 +1,17 @@
 import { Link, Outlet } from "react-router-dom";
+import "../styling/NavigationStyle.css";
 
 const Navigation = () => {
   return (
     <>
       <nav>
         <ul>
-          <li>
+          <a>
             <Link to="/signup">Sign Up</Link>
-          </li>
-          <li>
+          </a>
+          <a>
             <Link to="/login">Login</Link>
-          </li>
+          </a>
         </ul>
       </nav>
       <Outlet />
