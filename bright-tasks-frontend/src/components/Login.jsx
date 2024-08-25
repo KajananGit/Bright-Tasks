@@ -1,27 +1,28 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 
-const Login = ({ users }) => {
+const Login = ({ users, setLoggedInUser }) => {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (userValid()) {
-      console.log("Login Sucess!");
-    }
-    if (!userValid()) {
-      alert("Incorrect Email or Password entered!");
-    }
+    validateUser();
   };
 
-  const userValid = () => {
+  const validateUser = () => {
     const filteredUser = users.find(
       (user) =>
         user.email.toLowerCase() === loginEmail.toLocaleLowerCase() &&
         user.password === loginPassword,
     );
-    return !!filteredUser; //return true if a user is found, otherwise false
+    if (!filteredUser) {
+      alert("Incorrect Email or Password entered!");
+      return;
+    }
+    setLoggedInUser(filteredUser);
+    console.log(filteredUser);
+    alert(`Welcome ${filteredUser.userName}`);
   };
 
   return (
@@ -44,6 +45,7 @@ const Login = ({ users }) => {
 };
 Login.propTypes = {
   users: PropTypes.array.isRequired,
+  setLoggedInUser: PropTypes.func.isRequired,
 };
 
 export default Login;

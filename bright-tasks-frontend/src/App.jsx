@@ -8,6 +8,7 @@ import "./App.css";
 
 function App() {
   const [users, setUsers] = useState([]);
+  const [loggedInUser, setLoggedInUser] = useState();
 
   // GET Request to get all existing users
   const fetchUsers = async () => {
@@ -19,6 +20,7 @@ function App() {
   useEffect(() => {
     fetchUsers();
     console.log(users);
+    console.log(loggedInUser);
   }, []);
 
   const routes = createBrowserRouter([
@@ -32,7 +34,9 @@ function App() {
         },
         {
           path: "/login",
-          element: <LoginContainer users={users} />,
+          element: (
+            <LoginContainer users={users} setLoggedInUser={setLoggedInUser} />
+          ),
         },
       ],
     },
